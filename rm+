@@ -5,7 +5,7 @@ from os.path import expanduser, isdir
 from time import strftime
 import argparse
 
-TIME = strftime("%d%m%Y%H%M%S")
+TIME = strftime("%Y%m%d%H%M%S")
 DEST = expanduser("~") + '/.trash/'
 
 known_rm_args = [
@@ -32,10 +32,11 @@ args, files = ap.parse_known_args()
 
 if not os.path.exists(DEST):
     os.makedirs(DEST)
+os.makedirs(DEST + TIME)
 
 for f in files:
     if not os.path.exists(f):
         print("cannot remove '%s': No such file or directory" % f)
     else:
-        shutil.move(f, DEST + f + '.' + TIME)
+        shutil.move(f, DEST + TIME + '/' + f)
 
