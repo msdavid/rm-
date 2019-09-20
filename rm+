@@ -1,0 +1,18 @@
+#!/usr/bin/env python3
+import os
+from sys import argv
+import shutil
+from os.path import expanduser, isdir
+from time import strftime
+
+TIME = strftime("%d%m%Y%H%M%S")
+DEST = expanduser("~") + '/.trash/'
+
+if not os.path.exists(DEST):
+    os.makedirs(DEST)
+
+files=argv[1:]
+for f in files:
+	dest = DEST + f + '.' + TIME
+	shutil.move(f, DEST + f + '.' + TIME)
+
